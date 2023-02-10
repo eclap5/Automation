@@ -22,7 +22,7 @@ After these steps run 'Automation.py' file.
 
 At the moment the space has been defaulted to YO-Wappu, but it will be changed that user can specify which room is wanted.
 Also only spaces where every time slot is free between 08:00 and 20:00 can be reserved. If not, every free hour will be reserved until first reserved hour comes up.
-Program will crash when it tries to reserve already reserved hour.
+Program will crash when it tries to reserve already reserved hour. Also update for DUO MFA is coming in some point.
 
 Enjoy!
 
