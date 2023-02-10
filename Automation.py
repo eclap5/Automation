@@ -2,7 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-import time
 import datetime
 import configparser
 import Assets
@@ -12,58 +11,66 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 
 now = datetime.datetime.now()
-year = now.strftime("%Y")
-month = now.strftime("%m")
+today = now.strftime("%d")
 
 name = config['DEFAULT']['name']
 email = config['DEFAULT']['email']
 password = config['DEFAULT']['password']
 
-#print("What date you want to book? (Answer in format: 'DD', only current month): ")
-date = "12" #input()
+print("What date you want to book? (Answer in format: 'DD', only current month): ")
+date = input()
+
+while (int(date) < int(today)):
+    print("Please select new date.")
+    date = input()
 
 driver = webdriver.Chrome()
 
 wait = WebDriverWait(driver, 90)
 
 driver.get(Assets.reservationUrl)
-wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="i0116"]')))
-driver.find_element(By.XPATH, '//*[@id="i0116"]').send_keys(email)
-driver.find_element(By.XPATH, '//*[@id="idSIButton9"]').click()
+wait.until(EC.presence_of_element_located((By.XPATH, Assets.logInEmail)))
+driver.find_element(By.XPATH, Assets.logInEmail).send_keys(email)
+wait.until(EC.element_to_be_clickable((By.XPATH, Assets.logInNext)))
+driver.find_element(By.XPATH, Assets.logInNext).click()
 
-passwordInput = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="passwordInput"]')))
+passwordInput = wait.until(EC.presence_of_element_located((By.XPATH, Assets.logInPassword)))
 passwordInput.send_keys(password)
 
-driver.find_element(By.XPATH, '//*[@id="submitButton"]').click()
+driver.find_element(By.XPATH, Assets.logInSubmit).click()
 
-if (driver.current_url == 'https://login.microsoftonline.com/login.srf'):
-    driver.find_element(By.XPATH, '//*[@id="idBtn_Back"]').click()
+if (driver.current_url == Assets.logInUrl):
+    driver.find_element(By.XPATH, Assets.logInBackBtn).click()
 
 wait.until(EC.url_to_be(Assets.reservationUrl))
 
 
-for i in Assets.xPathList:
-    if (driver.current_url != Assets.reservationUrl):
-        driver.get(Assets.reservationUrl)
-        time.sleep(1)
+for i in range(1, 12):
 
-        # Select calendar from site and select wanted date
-        calendarPick = Assets.SelectDate(driver, date)
-        wait.until(EC.element_to_be_clickable)
-        driver.find_element(By.XPATH, calendarPick).click()
+    # Reload the correct page
+    driver.get(Assets.reservationUrl)
+    wait.until(EC.url_to_be(Assets.reservationUrl))
 
-        # Select space to be reserved. Currently defaulted to Yo Wappu  
-        driver.find_element(By.XPATH, '/html/body/div/div/form/div[6]/div/div/ul/li[14]/label/span').click() 
+    # Select calendar from site and select wanted date
+    calendarPick = Assets.SelectDate(driver, date, wait)
+    wait.until(EC.element_to_be_clickable((By.XPATH, calendarPick)))
+    driver.find_element(By.XPATH, calendarPick).click()
 
-        # Select time to be reserved. Selects one hour with every iteration.
-        xPathElementTime = '/html/body/div/div/form/div[7]/div[2]/div/div/ul/li[{}]/label/span'.format(i)
-        driver.find_element(By.XPATH, xPathElementTime).click()
+    # Select space to be reserved. Currently defaulted to Yo Wappu  
+    driver.find_element(By.XPATH, '/html/body/div/div/form/div[6]/div/div/ul/li[14]/label/span').click() 
 
-        # Fills in name and email
-        driver.find_element(By.XPATH, '//*[@id="mainContainer"]/div/form/div[8]/div/div/div[1]/input[1]').send_keys(name)
-        driver.find_element(By.XPATH, '//*[@id="mainContainer"]/div/form/div[8]/div/div/div[1]/input[2]').send_keys(email)
+    # Select time to be reserved. Selects one hour with every iteration.
+    xPathTime = Assets.SelectTime(driver, wait, i)
+    driver.find_element(By.XPATH, xPathTime).click()
 
-        # Clicks 'book' button
-        driver.find_element(By.XPATH, '//*[@id="mainContainer"]/div/form/div[10]/button').click()
-        time.sleep(3)
+    # Fills in name and email
+    driver.find_element(By.XPATH, Assets.nameField).send_keys(name)
+    driver.find_element(By.XPATH, Assets.emailField).send_keys(email)
+
+    # Clicks 'book' button
+    driver.find_element(By.XPATH, Assets.bookBtn).click()
+
+    #Clicks 'OK' button
+    wait.until(EC.element_to_be_clickable((By.XPATH, Assets.okBtn)))
+    driver.find_element(By.XPATH, Assets.okBtn).click()
 
