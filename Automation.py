@@ -61,6 +61,8 @@ for i in range(1, 12):
 
     # Select time to be reserved. Selects one hour with every iteration.
     xPathTime = Assets.SelectTime(driver, wait, i)
+    if (xPathTime == None):
+        continue
     driver.find_element(By.XPATH, xPathTime).click()
 
     # Fills in name and email
@@ -74,3 +76,6 @@ for i in range(1, 12):
     wait.until(EC.element_to_be_clickable((By.XPATH, Assets.okBtn)))
     driver.find_element(By.XPATH, Assets.okBtn).click()
 
+print("Reserved times: ")
+for i in Assets.reservedHours:
+    print(i)
