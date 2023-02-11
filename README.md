@@ -1,29 +1,34 @@
-Automation for Student Union House working space reservation in LUT University. <br />
+# Automation for Student Union House Working Space Reservation in LUT University
 
+## DISCLAIMER
+Use at your own risk. This code may contain bugs and security vulnerabilities.
 
-DISCLAIMER: <br />
-Use with your own responsibility, this code might include bugs and/or security flaws!
+## Introduction
+This project automates the process of reserving a working space in the Student Union House at LUT University.
 
+## Prerequisites
+- Up-to-date Chrome browser and chromedriver
+- `config.ini` file containing your LUT credentials in the following format:
+[DEFAULT]
+password = yourpassword
+email = yourLUTemail
+name = your name
 
-HOW TO USE: <br />
-Make sure your chromedriver and current Chrome version are up to date.
-You need a chromedriver which supports your Chrome version.
-You need to create 'config.ini' file which contains your LUT credentials.
-'config.ini' file needs to be in following format: <br />
-[DEFAULT] <br />
-password = yourpassword <br />
-email = yourLUTemail <br />
-name = your name <br />
-	
-After creation insert 'config.ini' to the same folder as the files downloaded from this github repository.
-Insert chromedriver.exe to the same folder.
+## Installation
+1. Download the files from this Github repository.
+2. Place the `config.ini` file and the `chromedriver.exe` in the same folder as the downloaded files.
+3. Run the `Automation.py` file.
 
-After these steps run 'Automation.py' file.
-Program reserves every free hour between 08:00 and 19:00 from the selected date.
+## Usage
+The program reserves every free hour between 08:00 and 19:00 from the selected date. By default, the room is set to YO-Wappu, but this will be changed in the future to allow the user to specify their preferred room. Additionally, support for DUO MFA will be added in the future.
 
-At the moment the space has been defaulted to YO-Wappu, but it will be changed so that user can specify which room is wanted.
-Also update for DUO MFA is coming in some point.
+## Note
+Please make sure that your chromedriver and Chrome browser are up to date and that the chromedriver supports your Chrome version.
 
+## Future plans
+- Allow the user to specify their preferred room.
+- Add support for DUO MFA.
 
-Created by: Aleksi Haapalainen
+## Author
+This project was created by Aleksi Haapalainen.
 
