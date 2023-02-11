@@ -8,11 +8,11 @@ This project automates the process of reserving a working space in the Student U
 
 ## Prerequisites
 - Up-to-date Chrome browser and chromedriver
-- `config.ini` file containing your LUT credentials in the following format:
-[DEFAULT]
-password = yourpassword
-email = yourLUTemail
-name = your name
+- `config.ini` file containing your LUT credentials in the following format:<br/>
+[DEFAULT]<br/>
+password = yourpassword<br/>
+email = yourLUTemail<br/>
+name = your name<br/>
 
 ## Installation
 1. Download the files from this Github repository.
