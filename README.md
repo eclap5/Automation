@@ -8,6 +8,8 @@ This project automates the process of reserving a working space in the Student U
 
 ## Prerequisites
 - Up-to-date Chrome browser and chromedriver
+- Python 3.7 or newer version.
+- Selenium library for Python. (pip install selenium).
 - `config.ini` file containing your LUT credentials in the following format:<br/>
 [DEFAULT]<br/>
 password = yourpassword<br/>
