@@ -1,11 +1,11 @@
-Automation for Student Union House upstairs working space reservation in LUT University. <br />
+Automation for Student Union House working space reservation in LUT University. <br />
 
 
 DISCLAIMER: <br />
 Use with your own responsibility, this code might include bugs and/or security flaws!
 
 
-How to use: <br />
+HOW TO USE: <br />
 Make sure your chromedriver and current Chrome version are up to date.
 You need a chromedriver which supports your Chrome version.
 You need to create 'config.ini' file which contains your LUT credentials.
