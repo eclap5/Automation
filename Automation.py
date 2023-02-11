@@ -12,17 +12,46 @@ config.read('config.ini')
 
 now = datetime.datetime.now()
 today = now.strftime("%d")
+month = now.strftime("%m")
+
+if (int(month) == 2):
+    maxdate = 28
+elif (int(month)%2 == 0):
+    maxdate = 30
+else:
+    maxdate = 31
 
 name = config['DEFAULT']['name']
 email = config['DEFAULT']['email']
 password = config['DEFAULT']['password']
 
-print("What date you want to book? (Answer in format: 'DD', only current month): ")
-date = input()
-
-while (int(date) < int(today)):
-    print("Please select new date.")
+while True:
+    print("What date you want to book? (Answer in format: 'DD', only current month): ", end='')
     date = input()
+    try:
+        while (int(date) < int(today) or int(date) > maxdate):
+            print("Please select new date: ", end='')
+            date = input()
+        break
+    except:
+        print("Use only numbers please.")
+    
+# while True:
+#     print("Which room would you like to choose?")
+#     print("1. Yo Delphi\n2. Yo Gif\n3. Yo Gurtti\n4. Yo Kofeiini")
+#     print("5. Yo Kondensaattori\n6. Yo Konkaavi\n7. Yo Kosmos")
+#     print("8. Yo Kuivatyöstö\n9. Yo Laulu\n10. Yo Reaktori")
+#     print("11. Yo Saimaa\n12. Yo Uni\n13. Yo Wappu")
+#     print("Your choice: ")
+#     space = input()
+#     try:
+#         while (int(space) < 1 and int(space) > 13):
+#             print("Please select a number between 1 and 13.")
+#             print("Your choice: ")
+#             space = input()
+#         break
+#     except:
+#         print("Use only numbers please.")
 
 driver = webdriver.Chrome()
 
