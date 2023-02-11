@@ -7,7 +7,7 @@ Use at your own risk. This code may contain bugs and security vulnerabilities.
 This project automates the process of reserving a working space in the Student Union House at LUT University.
 
 ## Prerequisites
-- Up-to-date Chrome browser and chromedriver
+- Up-to-date Chrome browser and chromedriver.
 - Python 3.7 or newer version.
 - Selenium library for Python. (pip install selenium).
 - `config.ini` file containing your LUT credentials in the following format:<br/>
@@ -28,7 +28,6 @@ The program reserves every free hour between 08:00 and 19:00 from the selected d
 Please make sure that your chromedriver and Chrome browser are up to date and that the chromedriver supports your Chrome version.
 
 ## Future plans
-- Allow the user to specify their preferred room.
 - Add support for DUO MFA.
 
 ## Author
