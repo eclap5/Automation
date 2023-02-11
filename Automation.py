@@ -11,12 +11,12 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 
 now = datetime.datetime.now()
-today = now.strftime("%d")
-month = now.strftime("%m")
+currentDay = now.strftime("%d")
+currentMonth = now.strftime("%m")
 
-if (int(month) == 2):
+if (int(currentMonth) == 2):
     maxdate = 28
-elif (int(month)%2 == 0):
+elif (int(currentMonth)%2 == 0):
     maxdate = 30
 else:
     maxdate = 31
@@ -26,12 +26,10 @@ email = config['DEFAULT']['email']
 password = config['DEFAULT']['password']
 
 while True:
-    print("What date you want to book? (Answer in format: 'DD', only current month): ", end='')
-    date = input()
+    date = input("What date you want to book? (Answer in format: 'DD', only current month): ")
     try:
-        while (int(date) < int(today) or int(date) > maxdate):
-            print("Please select new date: ", end='')
-            date = input()
+        while (int(date) < int(currentDay) or int(date) > maxdate):
+            date = input("Please select new date: ")
         break
     except:
         print("Use only numbers please.")
