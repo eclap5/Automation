@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 import datetime
+import time
 import configparser
 import Assets
 
@@ -34,22 +35,20 @@ while True:
     except:
         print("Use only numbers please.")
     
-# while True:
-#     print("Which room would you like to choose?")
-#     print("1. Yo Delphi\n2. Yo Gif\n3. Yo Gurtti\n4. Yo Kofeiini")
-#     print("5. Yo Kondensaattori\n6. Yo Konkaavi\n7. Yo Kosmos")
-#     print("8. Yo Kuivatyöstö\n9. Yo Laulu\n10. Yo Reaktori")
-#     print("11. Yo Saimaa\n12. Yo Uni\n13. Yo Wappu")
-#     print("Your choice: ")
-#     space = input()
-#     try:
-#         while (int(space) < 1 and int(space) > 13):
-#             print("Please select a number between 1 and 13.")
-#             print("Your choice: ")
-#             space = input()
-#         break
-#     except:
-#         print("Use only numbers please.")
+while True:
+    print("\nWhich room would you like to choose?")
+    print("1. Yo Delphi\n2. Yo Gif\n3. Yo Gurtti\n4. Yo Kofeiini")
+    print("5. Yo Kondensaattori\n6. Yo Konkaavi\n7. Yo Kosmos")
+    print("8. Yo Kuivatyöstö\n9. Yo Laulu\n10. Yo Reaktori")
+    print("11. Yo Saimaa\n12. Yo Uni\n13. Yo Wappu")
+    space = input("Your choice: ")
+    try:
+        while (int(space) < 1 or int(space) > 13):
+            print("\nPlease select a number between 1 and 13.")
+            space = input("Your choice: ")
+        break
+    except:
+        print("Use only numbers please.\n")
 
 driver = webdriver.Chrome()
 
@@ -80,11 +79,20 @@ for i in range(1, 12):
 
     # Select calendar from site and select wanted date
     calendarPick = Assets.SelectDate(driver, date, wait)
+    
+    if (calendarPick == None):
+        print("\nNo available times for selected date.")
+        driver.close()
+        print("Program will close in 30 seconds.")
+        time.sleep(30)
+        break
+
     wait.until(EC.element_to_be_clickable((By.XPATH, calendarPick)))
     driver.find_element(By.XPATH, calendarPick).click()
 
-    # Select space to be reserved. Currently defaulted to Yo Wappu  
-    driver.find_element(By.XPATH, '/html/body/div/div/form/div[6]/div/div/ul/li[14]/label/span').click() 
+    # Select room to be reserved. Currently defaulted to Yo Wappu
+    room = Assets.SelectRoom(space)
+    driver.find_element(By.XPATH, room).click() 
 
     # Select time to be reserved. Selects one hour with every iteration.
     xPathTime = Assets.SelectTime(driver, wait, i)
@@ -103,6 +111,7 @@ for i in range(1, 12):
     wait.until(EC.element_to_be_clickable((By.XPATH, Assets.okBtn)))
     driver.find_element(By.XPATH, Assets.okBtn).click()
 
-print("Reserved times: ")
-for i in Assets.reservedHours:
-    print(i)
+if (len(Assets.reservedHours) > 0):
+    print("Reserved times: ")
+    for i in Assets.reservedHours:
+        print(i)
