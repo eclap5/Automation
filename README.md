@@ -19,8 +19,9 @@ name = your name<br/>
 
 ## Installation
 1. Download the files from this Github repository.
-2. Place the `config.ini` file and the `chromedriver.exe` in the same folder as the downloaded files.
-3. Run the `Automation.py` file.
+2. Make sure you have Python and Selenium library installed.
+3. Place the `config.ini` file and the `chromedriver.exe` in the same folder as the downloaded files.
+4. Run the `Automation.py` file.
 
 ## Usage
 The program reserves every free hour between 08:00 and 19:00 from the selected date. Program asks the user to determine which room he/she wants to reserve. When user is logged in, there will be DUO MFA Authentication that user must provide manually with DUO MFA mobile app. Other than that everything else is automated.
