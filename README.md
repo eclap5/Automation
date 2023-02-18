@@ -7,6 +7,7 @@ Use at your own risk. This code may contain bugs and security vulnerabilities.
 This project automates the process of reserving a working space in the Student Union House at LUT University.
 
 ## Prerequisites
+- DUO MFA mobile app.
 - Up-to-date Chrome browser and chromedriver.
 - Python 3.7 or newer version.
 - Selenium library for Python. (pip install selenium).
@@ -22,13 +23,13 @@ name = your name<br/>
 3. Run the `Automation.py` file.
 
 ## Usage
-The program reserves every free hour between 08:00 and 19:00 from the selected date. By default, the room is set to YO-Wappu, but this will be changed in the future to allow the user to specify their preferred room. Additionally, support for DUO MFA will be added in the future.
+The program reserves every free hour between 08:00 and 19:00 from the selected date. Program asks the user to determine which room he/she wants to reserve. When user is logged in, there will be DUO MFA Authentication that user must provide manually with DUO MFA mobile app. Other than that everything else is automated.
 
 ## Note
 Please make sure that your chromedriver and Chrome browser are up to date and that the chromedriver supports your Chrome version.
 
 ## Future plans
-- Add support for DUO MFA.
+- Suggestions for improvements are welcome!
 
 ## Author
 This project was created by Aleksi Haapalainen.
