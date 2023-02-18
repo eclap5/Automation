@@ -8,8 +8,9 @@ logInEmail = '//*[@id="i0116"]'
 logInNext = '//*[@id="idSIButton9"]'
 logInPassword = '//*[@id="passwordInput"]'
 logInSubmit = '//*[@id="submitButton"]'
-logInUrl = 'https://login.microsoftonline.com/login.srf'
+logInUrl = 'https://login.microsoftonline.com/common/federation/OAuth2ClaimsProvider'
 logInBackBtn = '//*[@id="idBtn_Back"]'
+duoMfaBackBtn = '//*[@id="dont-trust-browser-button"]'
 
 nameField = '//*[@id="mainContainer"]/div/form/div[8]/div/div/div[1]/input[1]'
 emailField = '//*[@id="mainContainer"]/div/form/div[8]/div/div/div[1]/input[2]'
@@ -20,10 +21,10 @@ reservedHours = []
 
 # Function for selecting wanted date from date picker. Because date picker format, we must loop through every possible choice until wanted date is found.
 # Also check if there is no available times for desired date.
-def SelectDate(driver, date, wait):
-    wait.until(EC.visibility_of_element_located((By.XPATH, "/html/body/div/div/form/div[7]/div[1]/div/div/div[3]/div[1]")))
+def SelectDate(driver, date, wait): 
+    wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="mainContainer"]/div/form/div[7]/div[1]/div/div/div[3]/div[1]')))
     for i in range(1, 35):
-        xpath = "/html/body/div/div/form/div[7]/div[1]/div/div/div[3]/div[{}]".format(i)
+        xpath = '//*[@id="mainContainer"]/div/form/div[7]/div[1]/div/div/div[3]/div[{}]'.format(i)
         try:
             element = driver.find_element(By.XPATH, xpath)
             if ((element.text == date) and 
